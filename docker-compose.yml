@@ -1,22 +1,20 @@
-# Example docker-compose file for TimeTagger that uses the published
-# Docker image in the default root variant.
-# Shows all options settable via the environment.
-#
-# !! Make sure to apply your own credentials                       !!
-# !! You can use e.g. https://timetagger.app/cred to generate them !!
-# !! In docker-compose characters '$' should be escaped as '$$'    !!
-# !! If you use a .env file, use single quotes instead of escaping !!
+# from github.com/almarklein/timetagger
+version: "3.8"
 
-version: "3"
 services:
   timetagger:
     image: ghcr.io/almarklein/timetagger
     ports:
       - "80:80"
     volumes:
-      - ./_timetagger:/root/_timetagger
+      - timetagger_db_volume:/root/_timetagger
     environment:
       - TIMETAGGER_BIND=0.0.0.0:80
       - TIMETAGGER_DATADIR=/root/_timetagger
       - TIMETAGGER_LOG_LEVEL=info
-      - TIMETAGGER_CREDENTIALS=test:$$2a$$08$$0CD1NFiIbancwWsu3se1v.RNR/b7YeZd71yg3cZ/3whGlyU6Iny5i  # test:test
+      - TIMETAGGER_CREDENTIALS=test:$$2a$$08$$0CD1NFiIbancwWsu3se1v.RNR/b7YeZd71yg3cZ/3whGlyU6Iny5i
+
+volumes: # To be shared with timetagger-super-status
+  timetagger_db_volume: # Volume key
+    name: timetagger_shared_db_volume # Volume created with this name 
+    
