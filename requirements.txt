@@ -1,0 +1,9 @@
+uvicorn
+asgineer>=0.8.0
+itemdb>=1.1.1
+pscript>=0.7.6
+pyjwt
+jinja2
+markdown
+bcrypt
+iptools
